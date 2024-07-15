@@ -34,7 +34,7 @@ const Login = () => {
                     sessionStorage.setItem('token', data.token)
                     sessionStorage.setItem('id', data.id)
 
-                    window.location.reload()
+
                     navigate('/dashboard')
                 } else {
                     alert('Invalid Credentials')
