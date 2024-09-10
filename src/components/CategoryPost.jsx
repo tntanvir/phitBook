@@ -9,6 +9,8 @@ import {
     Button,
     IconButton,
 } from "@material-tailwind/react";
+import HomeProfile from './HomeProfile';
+import UserSuggest from './UserSuggest';
 
 const CategoryPost = () => {
     const { category } = useParams() //name
@@ -34,7 +36,10 @@ const CategoryPost = () => {
 
 
     const [data, setData] = useState([])
+    const [id, setId] = useState(null);
     useEffect(() => {
+        setId(sessionStorage.getItem('id'));
+
         fetch(`https://api-phitbook.onrender.com/post/allpost/?category=${CategorytoId(category)}`)
             .then(response => response.json())
             .then(data => setData(data))
@@ -56,7 +61,7 @@ const CategoryPost = () => {
         //     }
         // </div>
 
-        <div className=' flex'>
+        <div className=' flex dark:bg-black dark:text-white'>
             <div className='hidden md:block'>
 
                 <AllCategory />
@@ -71,6 +76,10 @@ const CategoryPost = () => {
                         data.length > 0 ? <Postcard post={data} /> : <DataNotFound />
                     }
                 </div>
+            </div>
+            <div className='w-full'>
+                <HomeProfile />
+                {id && <UserSuggest />}
             </div>
             <>
                 <Drawer open={open} onClose={closeDrawer} className="p-4">

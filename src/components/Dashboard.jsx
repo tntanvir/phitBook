@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { FaUser } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLocationDot } from "react-icons/fa6"
+import { MdEdit } from "react-icons/md";;
 import Layout from './Layout';
 import {
     Button,
@@ -22,6 +23,8 @@ import {
 import { Typography } from '@material-tailwind/react';
 import axios from 'axios';
 import { RiMenuUnfoldLine } from 'react-icons/ri';
+import { IoArrowForwardOutline } from 'react-icons/io5';
+import Follow from './Follow';
 
 const Dashboard = () => {
     const [main, setMain] = useState([])
@@ -67,7 +70,7 @@ const Dashboard = () => {
         fetch(`https://api-phitbook.onrender.com/authore/usermore/?user_id=${id}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 setOldPhone(data.phone_number)
                 setOldLocation(data.location)
                 setOldimg(data.image)
@@ -86,7 +89,7 @@ const Dashboard = () => {
             const res = await axios.post('https://api.imgbb.com/1/upload?key=526182029130a23070675bf11635fe8f', formData);
 
             if (res.data.data.url) {
-                console.log(res.data.data.url);
+                // console.log(res.data.data.url);
                 setOldimg(res.data.data.url);
                 setDone(true)
             }
@@ -99,7 +102,7 @@ const Dashboard = () => {
 
     const UpdateProfiledata = (e, id) => {
         e.preventDefault();
-        console.log(id);
+        // console.log(id);
         const formData = new FormData();
         formData.append('image', oldImg);
         formData.append('phone_number', oldPhone);
@@ -121,8 +124,56 @@ const Dashboard = () => {
     const openDrawer = () => setOpendower(true);
     const closeDrawer = () => setOpendower(false);
 
+    const singout = () => {
+        fetch('https://api-phitbook.onrender.com/authore/logout/')
+            .then(() => {
+                sessionStorage.removeItem('id');
+                sessionStorage.removeItem('token');
+                window.location.href = '/singin'
+
+            })
+    }
+
+    //follow 
+
+    const [following, setFollowing] = useState(null)
+    const [followers, setFollowers] = useState(null)
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        const username = sessionStorage.getItem('username');
+        fetch(`https://api-phitbook.onrender.com/post/allpost/?username=${username}`)
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                setData(data.reverse())
+            })
+    }, [])
+
+    useEffect(() => {
+        const username = sessionStorage.getItem('username');
+        fetch(`https://api-phitbook.onrender.com/authore/user/${username}/following/`)
+            .then(res => res.json())
+            .then(data => {
+                setFollowing(data);
+                // console.log('following', data);
+
+            })
+    }, [datareload])
+    useEffect(() => {
+        const username = sessionStorage.getItem('username');
+
+        fetch(`https://api-phitbook.onrender.com/authore/user/${username}/followers/`)
+            .then(res => res.json())
+            .then(data => {
+                setFollowers(data);
+                // console.log('followers', data);
+
+            })
+    }, [datareload])
+
     return (
-        <div className='flex'>
+        <div className='flex dark:bg-black dark:text-white'>
 
 
             <div className='hidden md:block w-1/5 border-r'>
@@ -139,25 +190,29 @@ const Dashboard = () => {
                     <div className='flex md:flex-row flex-col md:gap-10  min-h-screen pt-10 pl-10  w-full'>
                         <div className='flex   flex-col gap-2 items-center'>
 
-                            <div className='border-4 border-primary  h-52 flex justify-center  w-52 overflow-hidden rounded-full'>
-                                <div className='border-4  h-52 flex justify-center  w-52 overflow-hidden rounded-full '>
-
-
-                                    <img src={main.image} alt="" className='flex justify-center items-center' />
-                                </div>
+                            <div className='border-4 border-primary h-52 w-52 flex justify-center items-center overflow-hidden rounded-full'>
+                                <img src={main.image} alt="" className='h-full w-full object-cover' loading='lazy' />
                             </div>
                             <h1 className='text-3xl'>{main.first_name} {main.last_name}</h1>
                         </div>
 
-                        <div className='flex flex-col md:gap-16 gap-5'>
+                        <div className='flex flex-col md:gap-16 gap-5  '>
                             <div className='w-full '>
                                 <h1 className='flex gap-2 items-center md:text-2xl'><FaUser /> {main.username}</h1>
                                 <p className='flex gap-2 items-center md:text-2xl text-wrap '> <MdEmail /> {main.email}</p>
                                 <p className='flex gap-2 items-center md:text-2xl'><FaPhoneAlt /> {main.phone_number}</p>
                                 <p className='flex gap-2 items-center md:text-2xl'><FaLocationDot /> {main.location}</p>
+
+                                <div className='mt-6'>
+                                    {
+                                        data && following && followers && <Follow data={data} followers={followers} following={following} />
+                                    }
+                                </div>
                             </div>
                             <div className='flex gap-2'>
-                                <Button color='blue' onClick={() => oldData(main.user)}>Edit profile</Button>
+                                <Button className='flex justify-center items-center gap-1' color='blue' onClick={() => oldData(main.user)}><MdEdit className='text-xl' /> Edit profile</Button>
+                                <Button className='flex justify-center items-center gap-1' color='blue' onClick={singout}>singout <IoArrowForwardOutline className='text-xl' /></Button>
+
 
                             </div>
                         </div>

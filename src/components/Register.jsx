@@ -25,9 +25,7 @@ const Register = () => {
 
 
     const updateImgtoUrl = async (e) => {
-        // e.preventDefault();
-        // console.log(image);
-        console.log(e);
+
 
         try {
             const formData = new FormData();
@@ -67,7 +65,7 @@ const Register = () => {
                 console.log(data.errors);
             }
             else {
-                console.log(data);
+                // console.log(data);
                 navigate('/singin')
             }
 
@@ -76,8 +74,8 @@ const Register = () => {
     }
 
     return (
-        <div className='flex justify-center items-center'>
-            <Card className='md:w-1/2 w-full p-2'>
+        <div className='flex justify-center items-center dark:bg-black dark:text-white'>
+            <Card className='md:w-1/2 w-full p-2 '>
                 <Typography variant="h4" color="blue-gray">
                     Sign Up
                 </Typography>
@@ -220,7 +218,7 @@ const Register = () => {
                     </Button>
                     <Typography color="gray" className="mt-4 text-center font-normal">
                         Already have an account?{" "}
-                        <Link to={'/signin'} className="font-medium text-gray-900">
+                        <Link to={'/singin'} className="font-medium text-gray-900">
                             Sign In
                         </Link>
                     </Typography>

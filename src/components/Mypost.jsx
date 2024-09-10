@@ -30,7 +30,7 @@ const Mypost = () => {
     const closeDrawer = () => setOpendower(false);
 
     return (
-        <div className='flex min-h-screen'>
+        <div className='flex min-h-screen dark:bg-black dark:text-white'>
 
             <div className='hidden md:block w-1/5 border-r'>
 

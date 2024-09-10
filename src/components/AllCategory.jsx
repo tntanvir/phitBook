@@ -20,22 +20,9 @@ const AllCategory = () => {
 
     }, [])
     return (
-        // <div>
-        //     <div className=' flex flex-col bg-red-500 gap-4 flex-wrap '>
-
-        //         {
-        //             category && category.map((e, i) => (
-        //                 <Link key={i} to={`/category/${e.name}`}>
-
-        //                     <Chip variant="ghost" value={e.name} />
-        //                 </Link>
-        //             ))
-        //         }
-        //     </div>
-        // </div>
-        <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 ">
+        <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 dark:bg-black dark:text-white">
             <div className="mb-2 p-4">
-                <Typography variant="h5" color="blue-gray">
+                <Typography variant="h5" className='dark:bg-black dark:text-white'>
                     Category
                 </Typography>
             </div>
@@ -46,7 +33,7 @@ const AllCategory = () => {
                         <Link key={i} to={`/category/${e.name}`}>
 
                             {/* <Chip variant="ghost" value={e.name} /> */}
-                            <ListItem>
+                            <ListItem className='dark:bg-black dark:text-white dark:hover:bg-blue-gray-700/90'>
                                 <ListItemPrefix>
                                 </ListItemPrefix>
                                 {e.name}

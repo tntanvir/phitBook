@@ -37,7 +37,7 @@ const Category = () => {
             .then(data => {
                 setName('')
                 setSlug('')
-                console.log(data);
+                // console.log(data);
             }).catch(err => {
                 console.log(err)
             });
@@ -48,7 +48,7 @@ const Category = () => {
     const openDrawer = () => setOpendower(true);
     const closeDrawer = () => setOpendower(false);
     return (
-        <div className='flex min-h-screen'>
+        <div className='flex min-h-screen dark:bg-black dark:text-white'>
 
             <div className='hidden md:block w-1/5 border-r'>
 

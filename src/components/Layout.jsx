@@ -30,7 +30,7 @@ const Layout = () => {
             <div className='flex flex-col gap-1 p-1'>
                 {Pages.map((page, index) => (
                     <Link key={index} to={page.path} className='text-gray-800 hover:text-gray-700 '>
-                        <div className='bg-gray-100 p-2 rounded-md hover:bg-blue-100 hover:text-black '>
+                        <div className='bg-gray-100 p-2 rounded-md hover:bg-blue-100 hover:text-black dark:bg-[#3a3b3c] dark:text-white'>
 
                             {page.text}
 

@@ -20,6 +20,10 @@ import MultiSelect from "./MultiSelect";
 import { Drawer } from "@material-tailwind/react";
 import { IconButton } from "@material-tailwind/react";
 import { RiMenuUnfoldLine } from "react-icons/ri";
+import { useContext } from "react";
+import { MyContext } from "../App";
+import { Checkbox } from "@material-tailwind/react";
+import YouTubeVideo from "./YouTubeVideo";
 
 
 const Addpost = () => {
@@ -28,6 +32,9 @@ const Addpost = () => {
     const [discription, setDiscription] = useState('')
     const [category, setCategory] = useState('')
     const [option, setOption] = useState([])
+
+    const [videobool, setVideobool] = useState(true)
+    const [videourl, setVideourl] = useState(null)
 
 
 
@@ -48,49 +55,79 @@ const Addpost = () => {
     const imgtoUrl = async (e) => {
         e.preventDefault();
 
-        console.log(image);
+        if (videobool) {
 
-        try {
-            const formData = new FormData();
-            formData.append('image', image);
+            try {
+                const formData = new FormData();
+                formData.append('image', image);
 
-            const res = await axios.post('https://api.imgbb.com/1/upload?key=526182029130a23070675bf11635fe8f', formData);
-
-            if (res.data.data.url) {
-                console.log(res.data.data.url);
+                const res = await axios.post('https://api.imgbb.com/1/upload?key=526182029130a23070675bf11635fe8f', formData);
 
                 if (res.data.data.url) {
-                    const formData = new FormData();
-                    formData.append('image', res.data.data.url);
-                    formData.append('title', title);
-                    formData.append('user', sessionStorage.getItem('id'));
-                    formData.append('discription', discription);
-                    category.forEach(catId => formData.append('category', catId));
 
-                    formData.forEach((value, key) => {
-                        console.log(`${key}: ${value}`);
-                    });
 
-                    const response = await fetch('https://api-phitbook.onrender.com/post/allpost/', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Token ${sessionStorage.getItem('token')}`,
-                        },
-                        body: formData,
-                    });
+                    if (res.data.data.url) {
+                        const formData = new FormData();
+                        formData.append('image', res.data.data.url);
+                        formData.append('title', title);
+                        formData.append('user', sessionStorage.getItem('id'));
+                        formData.append('discription', discription);
+                        category.forEach(catId => formData.append('category', catId));
 
-                    const data = await response.json();
+                        // formData.forEach((value, key) => {
+                        //     console.log(`${key}: ${value}`);
+                        // });
 
-                    if (data.errors) {
-                        console.log('error', data.errors);
-                    } else {
-                        console.log(data);
-                        navigate('/dashboard/mypost')
+                        const response = await fetch('https://api-phitbook.onrender.com/post/allpost/', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Token ${sessionStorage.getItem('token')}`,
+                            },
+                            body: formData,
+                        });
+
+                        const data = await response.json();
+
+                        if (data.errors) {
+                            console.log('error', data.errors);
+                        } else {
+                            // console.log(data);
+                            navigate('/dashboard/mypost')
+                        }
                     }
                 }
+            } catch (err) {
+                console.log(err);
             }
-        } catch (err) {
-            console.log(err);
+        }
+        else {
+            const formData = new FormData();
+            formData.append('video', videourl);
+            formData.append('title', title);
+            formData.append('user', sessionStorage.getItem('id'));
+            formData.append('discription', discription);
+            category.forEach(catId => formData.append('category', catId));
+
+            // formData.forEach((value, key) => {
+            //     console.log(`${key}: ${value}`);
+            // });
+
+            const response = await fetch('https://api-phitbook.onrender.com/post/allpost/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Token ${sessionStorage.getItem('token')}`,
+                },
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (data.errors) {
+                console.log('error', data.errors);
+            } else {
+                // console.log(data);
+                navigate('/dashboard/mypost')
+            }
         }
     };
 
@@ -99,8 +136,10 @@ const Addpost = () => {
     const openDrawer = () => setOpendower(true);
     const closeDrawer = () => setOpendower(false);
 
+    const [gThem, setGThem] = useContext(MyContext);
+
     return (
-        <div className='flex min-h-screen'>
+        <div className='flex min-h-screen dark:bg-black dark:text-white'>
 
             <div className='hidden md:block w-1/5 border-r'>
 
@@ -112,39 +151,78 @@ const Addpost = () => {
 
                 </div>
                 <div className="flex justify-center items-center ">
-                    <Card className='md:w-1/2 p-2'>
-                        <Typography variant="h4" color="blue-gray">
+                    <Card className='md:w-2/3 p-2 shadow-none border dark:bg-[#3a3b3c] dark:text-white'>
+                        <Typography variant="h4" >
                             Add Post
                         </Typography>
 
                         <form className="mt-8 mb-2 w-full p-2" onSubmit={imgtoUrl}>
                             <div className="mb-1 flex flex-col gap-6">
-                                <Typography variant="h6" color="blue-gray" className="-mb-3">
-                                    Image
-                                </Typography>
-                                <Input
-                                    size="lg"
-                                    className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                                    type='file'
-                                    required
-                                    labelProps={{
-                                        className: "before:content-none after:content-none",
-                                    }}
-                                    onChange={(e) => setImage(e.target.files[0])}
-                                />
+                                <Checkbox label="Add youtube url" onClick={() => setVideobool(!videobool)} />
+                                {videobool ?
 
-                                <Typography variant="h6" color="blue-gray" className="-mb-3">
-                                    Select
+                                    <div>
+                                        <Typography variant="h6" className="mb-3">
+                                            Image
+                                        </Typography>
+
+                                        {image ? (<div>
+                                            {
+                                                <img src={URL.createObjectURL(image)} alt="post img" className="w-full h-64 object-cover" />
+                                            }
+
+                                        </div>) :
+                                            (<Input
+                                                size="lg"
+                                                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                                                type='file'
+                                                required
+                                                labelProps={{
+                                                    className: "before:content-none after:content-none",
+                                                }}
+                                                onChange={(e) => setImage(e.target.files[0])}
+                                            />)
+
+                                        }
+                                    </div>
+                                    :
+                                    <div>
+                                        <Typography variant="h6" className="mb-3">
+                                            Video URL
+                                        </Typography>
+                                        <Input
+                                            size="lg"
+                                            placeholder="Enter Video URL"
+                                            className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:text-white"
+                                            required
+                                            labelProps={{
+                                                className: "before:content-none after:content-none",
+                                            }}
+                                            onChange={(e) => setVideourl(e.target.value)}
+                                        />
+
+                                        <div className="pt-2">
+                                            {
+                                                videourl && <YouTubeVideo videoUrl={videourl} />
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+
+                                <Typography variant="h6" className="-mb-3">
+                                    Category
                                 </Typography>
 
                                 <MultiSelect
                                     option={option}
                                     selectedOptions={category}
                                     setSelectedOptions={setCategory}
+                                    isDarkMode={gThem === "dark" ? true : false}
                                 />
 
 
-                                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                                <Typography variant="h6" className="-mb-3">
                                     Title
                                 </Typography>
                                 <Input
@@ -157,7 +235,7 @@ const Addpost = () => {
                                     }}
                                     onChange={(e) => setTitle(e.target.value)}
                                 />
-                                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                                <Typography variant="h6" className="-mb-3">
                                     Discription
                                 </Typography>
                                 <Textarea size="lg" required label="Textarea Large" rows={10} onChange={(e) => setDiscription(e.target.value)} />
@@ -172,10 +250,10 @@ const Addpost = () => {
                 </div>
                 <Drawer open={opendawer} onClose={closeDrawer} className="p-4">
                     <div className="mb-6 flex items-center justify-between">
-                        {/* <Typography variant="h5" color="blue-gray">
+                        {/* <Typography variant="h5" >
                         Material Tailwind
                     </Typography> */}
-                        <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
+                        <IconButton variant="text" onClick={closeDrawer}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -200,12 +278,5 @@ const Addpost = () => {
 };
 
 export default Addpost;
-
-
-
-
-
-
-
 
 

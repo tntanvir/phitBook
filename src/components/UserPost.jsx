@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const UserPost = ({ id }) => {
     const [main, setMain] = useState([])
 
     useEffect(() => {
-        // const id = sessionStorage.getItem('id');
-        // console.log(id);
+
         const fetchUser = async () => {
             try {
                 const res1 = await fetch(`https://api-phitbook.onrender.com/authore/user/${id}/`);
@@ -33,21 +33,21 @@ const UserPost = ({ id }) => {
         <div>
 
             {main &&
-                <div className='flex gap-3'>
+                <Link to={`/profile/${main.username}`}>
+                    <div className='flex gap-3'>
+
+                        <div className='border border-primary  h-10 flex justify-center  w-10 overflow-hidden rounded-full '>
 
 
-                    <div className='border border-primary  h-10 flex justify-center  w-10 overflow-hidden rounded-full '>
+                            <img src={main.image} alt="" className='flex justify-center items-center' loading='lazy' />
+                        </div>
+                        <div>
 
-
-                        <img src={main.image} alt="" className='flex justify-center items-center' />
+                            <h1>{main.username}</h1>
+                            <p>{main.email}</p>
+                        </div>
                     </div>
-                    <div>
-
-                        <h1>{main.username}</h1>
-                        <p>{main.email}</p>
-                    </div>
-
-                </div>
+                </Link>
 
             }
         </div>
