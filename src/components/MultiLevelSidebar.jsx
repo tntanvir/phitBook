@@ -143,7 +143,7 @@ export function MultiLevelSidebar() {
                         </ListItemSuffix>
                     </ListItem>
                 </Link>
-                <Accordion
+                {userid && <Accordion
                     open={open === 1}
                     icon={
                         <FaChevronDown className={`mx-auto h-4 w-4 transition-transform ${open === 1 ? "rotate-180" : ""}`} />
@@ -179,7 +179,7 @@ export function MultiLevelSidebar() {
 
                         </List>
                     </AccordionBody>
-                </Accordion>
+                </Accordion>}
                 <Accordion
                     open={open === 2}
                     icon={
