@@ -26,7 +26,7 @@ function NavList() {
     useEffect(() => {
         const id = sessionStorage.getItem('id')
         setUserid(id)
-        fetch(`https://api-phitbook.onrender.com/authore/usermore/?user_id=${id}`)
+        fetch(`https://api-phitbook.vercel.app/authore/usermore/?user_id=${id}`)
             .then(response => response.json())
             .then(data => {
                 setData(data)
@@ -95,7 +95,7 @@ export function NavbarSimple() {
     useEffect(() => {
         const id = sessionStorage.getItem('id')
         setUserid(id)
-        fetch(`https://api-phitbook.onrender.com/authore/usermore/?user_id=${id}`)
+        fetch(`https://api-phitbook.vercel.app/authore/usermore/?user_id=${id}`)
             .then(response => response.json())
             .then(data => {
                 setData(data)

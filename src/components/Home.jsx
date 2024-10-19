@@ -48,13 +48,13 @@ const Home = () => {
     const [category, setCategory] = useState()
     const [datareload, setDatareload] = useState(false)
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/post/allpost/')
+        fetch('https://api-phitbook.vercel.app/post/allpost/')
             .then(response => response.json())
             .then(data => setPost(data))
 
     }, [datareload])
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/category/all/')
+        fetch('https://api-phitbook.vercel.app/category/all/')
             .then(response => response.json())
             .then(data => setCategory(data))
 
@@ -70,7 +70,7 @@ const Home = () => {
     useEffect(() => {
         const id = sessionStorage.getItem('id')
 
-        fetch(`https://api-phitbook.onrender.com/authore/usermore/?user_id=${id}`)
+        fetch(`https://api-phitbook.vercel.app/authore/usermore/?user_id=${id}`)
             .then(response => response.json())
             .then(data => {
                 setUser(data)
@@ -95,7 +95,7 @@ const Home = () => {
     const [categorys, setCategorys] = useState('')
     const [option, setOption] = useState([])
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/category/all/')
+        fetch('https://api-phitbook.vercel.app/category/all/')
             .then(res => res.json())
             .then(data => {
                 const formattedOptions = data.map(c => ({ value: c.id, label: c.name }));
@@ -133,7 +133,7 @@ const Home = () => {
                             console.log(`${key}: ${value}`);
                         });
 
-                        const response = await fetch('https://api-phitbook.onrender.com/post/allpost/', {
+                        const response = await fetch('https://api-phitbook.vercel.app/post/allpost/', {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Token ${sessionStorage.getItem('token')}`,
@@ -167,7 +167,7 @@ const Home = () => {
                 console.log(`${key}: ${value}`);
             });
 
-            const response = await fetch('https://api-phitbook.onrender.com/post/allpost/', {
+            const response = await fetch('https://api-phitbook.vercel.app/post/allpost/', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Token ${sessionStorage.getItem('token')}`,

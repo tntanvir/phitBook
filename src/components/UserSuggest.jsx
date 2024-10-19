@@ -18,8 +18,8 @@ const UserSuggest = () => {
         const fetchUserAndMore = async () => {
             try {
                 const [userResponse, usermoreResponse] = await Promise.all([
-                    fetch(`https://api-phitbook.onrender.com/authore/user/`),  // Get all users
-                    fetch(`https://api-phitbook.onrender.com/authore/usermore/`)  // Get additional user info
+                    fetch(`https://api-phitbook.vercel.app/authore/user/`),  // Get all users
+                    fetch(`https://api-phitbook.vercel.app/authore/usermore/`)  // Get additional user info
                 ]);
 
                 const userData = await userResponse.json();
@@ -53,7 +53,7 @@ const UserSuggest = () => {
 
     const handleFollow = async (username) => {
         try {
-            const response = await fetch(`https://api-phitbook.onrender.com/authore/user/${username}/follow/`, {
+            const response = await fetch(`https://api-phitbook.vercel.app/authore/user/${username}/follow/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ const UserSuggest = () => {
     // useEffect(() => {
     //     const followStatus = () => {
 
-    //         fetch(`https://api-phitbook.onrender.com/authore/user/${username}/follow-status/`, {
+    //         fetch(`https://api-phitbook.vercel.app/authore/user/${username}/follow-status/`, {
     //             method: 'GET',
     //             headers: {
     //                 'Content-Type': 'application/json',

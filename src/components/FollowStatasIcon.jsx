@@ -9,7 +9,7 @@ const FollowStatasIcon = ({ username }) => {
 
     const handleFollow = async () => {
         try {
-            const response = await fetch(`https://api-phitbook.onrender.com/authore/user/${username}/follow/`, {
+            const response = await fetch(`https://api-phitbook.vercel.app/authore/user/${username}/follow/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const FollowStatasIcon = ({ username }) => {
 
     useEffect(() => {
         const followStatus = () => {
-            fetch(`https://api-phitbook.onrender.com/authore/user/${username}/follow-status/`, {
+            fetch(`https://api-phitbook.vercel.app/authore/user/${username}/follow-status/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

@@ -42,10 +42,10 @@ const UserProfile = () => {
 
         const fetchUser = async () => {
             try {
-                const res1 = await fetch(`https://api-phitbook.onrender.com/authore/user/?username=${username}`);
+                const res1 = await fetch(`https://api-phitbook.vercel.app/authore/user/?username=${username}`);
                 const userData = await res1.json();
 
-                const res2 = await fetch(`https://api-phitbook.onrender.com/authore/usermore/?username=${username}`);
+                const res2 = await fetch(`https://api-phitbook.vercel.app/authore/usermore/?username=${username}`);
                 const userMoreData = await res2.json();
                 const combinedData = { ...userData, ...userMoreData };
 
@@ -58,7 +58,7 @@ const UserProfile = () => {
                 console.error('Error fetching data:', error);
             }
         };
-        fetch(`https://api-phitbook.onrender.com/post/allpost/?username=${username}`)
+        fetch(`https://api-phitbook.vercel.app/post/allpost/?username=${username}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
@@ -76,7 +76,7 @@ const UserProfile = () => {
     const opendata = (id) => {
         handleOpen()
         setDataopen(null)
-        fetch(`https://api-phitbook.onrender.com/post/allpost/${id}/`)
+        fetch(`https://api-phitbook.vercel.app/post/allpost/${id}/`)
             .then(res => res.json())
             .then(data => {
                 setDataopen(data)
@@ -89,7 +89,7 @@ const UserProfile = () => {
 
     const SubmitBtn = (id) => {
         if (sessionStorage.getItem('token') != null) {
-            fetch(`https://api-phitbook.onrender.com/post/allcomment/`, {
+            fetch(`https://api-phitbook.vercel.app/post/allcomment/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ const UserProfile = () => {
         if (sessionStorage.getItem('token') != null) {
             setBool(!bool)
             const usrid = sessionStorage.getItem('id')
-            fetch(`https://api-phitbook.onrender.com/post/likes/?post_id=${id}`, {
+            fetch(`https://api-phitbook.vercel.app/post/likes/?post_id=${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ const UserProfile = () => {
 
     const handleFollow = async () => {
         try {
-            const response = await fetch(`https://api-phitbook.onrender.com/authore/user/${username}/follow/`, {
+            const response = await fetch(`https://api-phitbook.vercel.app/authore/user/${username}/follow/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -213,7 +213,7 @@ const UserProfile = () => {
     useEffect(() => {
         const followStatus = () => {
 
-            fetch(`https://api-phitbook.onrender.com/authore/user/${username}/follow-status/`, {
+            fetch(`https://api-phitbook.vercel.app/authore/user/${username}/follow-status/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -237,7 +237,7 @@ const UserProfile = () => {
     const [followers, setFollowers] = useState(null)
 
     useEffect(() => {
-        fetch(`https://api-phitbook.onrender.com/authore/user/${username}/following/`)
+        fetch(`https://api-phitbook.vercel.app/authore/user/${username}/following/`)
             .then(res => res.json())
             .then(data => {
                 setFollowing(data);
@@ -245,7 +245,7 @@ const UserProfile = () => {
             })
     }, [username, followBool])
     useEffect(() => {
-        fetch(`https://api-phitbook.onrender.com/authore/user/${username}/followers/`)
+        fetch(`https://api-phitbook.vercel.app/authore/user/${username}/followers/`)
             .then(res => res.json())
             .then(data => {
                 setFollowers(data);

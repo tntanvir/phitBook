@@ -42,7 +42,7 @@ const Addpost = () => {
 
 
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/category/all/')
+        fetch('https://api-phitbook.vercel.app/category/all/')
             .then(res => res.json())
             .then(data => {
                 const formattedOptions = data.map(c => ({ value: c.id, label: c.name }));
@@ -78,7 +78,7 @@ const Addpost = () => {
                         //     console.log(`${key}: ${value}`);
                         // });
 
-                        const response = await fetch('https://api-phitbook.onrender.com/post/allpost/', {
+                        const response = await fetch('https://api-phitbook.vercel.app/post/allpost/', {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Token ${sessionStorage.getItem('token')}`,
@@ -112,7 +112,7 @@ const Addpost = () => {
             //     console.log(`${key}: ${value}`);
             // });
 
-            const response = await fetch('https://api-phitbook.onrender.com/post/allpost/', {
+            const response = await fetch('https://api-phitbook.vercel.app/post/allpost/', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Token ${sessionStorage.getItem('token')}`,

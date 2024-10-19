@@ -35,10 +35,10 @@ const Dashboard = () => {
         // console.log(id);
         const fetchUser = async () => {
             try {
-                const res1 = await fetch(`https://api-phitbook.onrender.com/authore/user/${id}/`);
+                const res1 = await fetch(`https://api-phitbook.vercel.app/authore/user/${id}/`);
                 const userData = await res1.json();
 
-                const res2 = await fetch(`https://api-phitbook.onrender.com/authore/usermore/?user_id=${id}`);
+                const res2 = await fetch(`https://api-phitbook.vercel.app/authore/usermore/?user_id=${id}`);
                 const userMoreData = await res2.json();
                 const combinedData = { ...userData, ...userMoreData };
 
@@ -67,7 +67,7 @@ const Dashboard = () => {
     const [oldid, setOldid] = useState('');
     const [done, setDone] = useState(true);
     const oldData = (id) => {
-        fetch(`https://api-phitbook.onrender.com/authore/usermore/?user_id=${id}`)
+        fetch(`https://api-phitbook.vercel.app/authore/usermore/?user_id=${id}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data);
@@ -108,7 +108,7 @@ const Dashboard = () => {
         formData.append('phone_number', oldPhone);
         formData.append('location', oldLocation);
 
-        fetch(`https://api-phitbook.onrender.com/authore/usermore/?user_id=${id}`, {
+        fetch(`https://api-phitbook.vercel.app/authore/usermore/?user_id=${id}`, {
             method: 'PUT',
 
             body: formData
@@ -125,7 +125,7 @@ const Dashboard = () => {
     const closeDrawer = () => setOpendower(false);
 
     const singout = () => {
-        fetch('https://api-phitbook.onrender.com/authore/logout/')
+        fetch('https://api-phitbook.vercel.app/authore/logout/')
             .then(() => {
                 sessionStorage.removeItem('id');
                 sessionStorage.removeItem('token');
@@ -142,7 +142,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         const username = sessionStorage.getItem('username');
-        fetch(`https://api-phitbook.onrender.com/post/allpost/?username=${username}`)
+        fetch(`https://api-phitbook.vercel.app/post/allpost/?username=${username}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
@@ -152,7 +152,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         const username = sessionStorage.getItem('username');
-        fetch(`https://api-phitbook.onrender.com/authore/user/${username}/following/`)
+        fetch(`https://api-phitbook.vercel.app/authore/user/${username}/following/`)
             .then(res => res.json())
             .then(data => {
                 setFollowing(data);
@@ -163,7 +163,7 @@ const Dashboard = () => {
     useEffect(() => {
         const username = sessionStorage.getItem('username');
 
-        fetch(`https://api-phitbook.onrender.com/authore/user/${username}/followers/`)
+        fetch(`https://api-phitbook.vercel.app/authore/user/${username}/followers/`)
             .then(res => res.json())
             .then(data => {
                 setFollowers(data);

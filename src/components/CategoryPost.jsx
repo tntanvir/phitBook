@@ -18,7 +18,7 @@ const CategoryPost = () => {
 
     const [categoryto, setCategoryto] = useState([]);
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/category/all/')
+        fetch('https://api-phitbook.vercel.app/category/all/')
             .then(response => response.json())
             .then(data => setCategoryto(data))
 
@@ -40,7 +40,7 @@ const CategoryPost = () => {
     useEffect(() => {
         setId(sessionStorage.getItem('id'));
 
-        fetch(`https://api-phitbook.onrender.com/post/allpost/?category=${CategorytoId(category)}`)
+        fetch(`https://api-phitbook.vercel.app/post/allpost/?category=${CategorytoId(category)}`)
             .then(response => response.json())
             .then(data => setData(data))
     }, [categoryto, category])

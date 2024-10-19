@@ -11,7 +11,7 @@ const FollowingPost = () => {
     const [Post, setPost] = useState()
     const [datareload, setDatareload] = useState(false)
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/post/posts/following/', {
+        fetch('https://api-phitbook.vercel.app/post/posts/following/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -71,7 +71,7 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
     // console.log(type);
     const [categorys, setCategorys] = useState([]);
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/category/all/')
+        fetch('https://api-phitbook.vercel.app/category/all/')
             .then(response => response.json())
             .then(data => setCategorys(data))
 
@@ -97,7 +97,7 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
 
 
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/category/all/')
+        fetch('https://api-phitbook.vercel.app/category/all/')
             .then(res => res.json())
             .then(data => {
                 const formattedOptions = data.map(c => ({ value: c.id, label: c.name }));
@@ -143,7 +143,7 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
 
 
     const updatePost = (id) => {
-        fetch(`https://api-phitbook.onrender.com/post/allpost/${id}/`)
+        fetch(`https://api-phitbook.vercel.app/post/allpost/${id}/`)
             .then(res => res.json())
             .then(data => {
                 setUpdateid(data.id)
@@ -178,7 +178,7 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
             updatecategory.forEach(catId => formData.append('category', catId));
 
 
-            fetch(`https://api-phitbook.onrender.com/post/allpost/${id}/`, {
+            fetch(`https://api-phitbook.vercel.app/post/allpost/${id}/`, {
                 method: 'PUT',
                 headers: {
                     // 'Content-Type': 'application/json',
@@ -200,7 +200,7 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
 
 
     const deletePost = (id) => {
-        fetch(`https://api-phitbook.onrender.com/post/allpost/${id}/`, {
+        fetch(`https://api-phitbook.vercel.app/post/allpost/${id}/`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Token ${sessionStorage.getItem('token')}`,
@@ -220,7 +220,7 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
     const SubmitBtn = (id) => {
         if (sessionStorage.getItem('token') != null) {
 
-            fetch(`https://api-phitbook.onrender.com/post/allcomment/`, {
+            fetch(`https://api-phitbook.vercel.app/post/allcomment/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -262,7 +262,7 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
         if (sessionStorage.getItem('id') != null) {
             setBool(!bool)
             const usrid = sessionStorage.getItem('id')
-            fetch(`https://api-phitbook.onrender.com/post/likes/?post_id=${id}`, {
+            fetch(`https://api-phitbook.vercel.app/post/likes/?post_id=${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

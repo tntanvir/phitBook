@@ -24,7 +24,7 @@ const Category = () => {
     const [Name, setName] = useState('')
     const [Slug, setSlug] = useState('')
     const submitbtn = () => {
-        fetch('https://api-phitbook.onrender.com/category/all/', {
+        fetch('https://api-phitbook.vercel.app/category/all/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',

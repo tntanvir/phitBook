@@ -14,7 +14,7 @@ import {
 const AllCategory = () => {
     const [category, setCategory] = useState()
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/category/all/')
+        fetch('https://api-phitbook.vercel.app/category/all/')
             .then(response => response.json())
             .then(data => setCategory(data))
 

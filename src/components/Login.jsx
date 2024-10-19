@@ -24,7 +24,7 @@ const Login = () => {
 
     const formSubmit = () => {
         // console.log(username, password);
-        fetch('https://api-phitbook.onrender.com/authore/login/', {
+        fetch('https://api-phitbook.vercel.app/authore/login/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',

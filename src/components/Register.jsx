@@ -56,7 +56,7 @@ const Register = () => {
         formData.append('location', Location)
         formData.append('password', password)
         formData.append('confirm_password', confirmpassword)
-        fetch('https://api-phitbook.onrender.com/authore/registar/', {
+        fetch('https://api-phitbook.vercel.app/authore/registar/', {
             method: 'POST',
             body: formData,
 

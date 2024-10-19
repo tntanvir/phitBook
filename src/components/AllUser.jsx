@@ -15,8 +15,8 @@ const AllUser = () => {
         const fetchUserAndMore = async () => {
             try {
                 const [userResponse, usermoreResponse] = await Promise.all([
-                    fetch(`https://api-phitbook.onrender.com/authore/user/`),  // Get all users
-                    fetch(`https://api-phitbook.onrender.com/authore/usermore/`)  // Get additional user info
+                    fetch(`https://api-phitbook.vercel.app/authore/user/`),  // Get all users
+                    fetch(`https://api-phitbook.vercel.app/authore/usermore/`)  // Get additional user info
                 ]);
 
                 const userData = await userResponse.json();

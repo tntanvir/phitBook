@@ -8,7 +8,7 @@ const HomeProfile = () => {
         const id = sessionStorage.getItem('id');
 
         // First fetch for usermore data
-        fetch(`https://api-phitbook.onrender.com/authore/usermore/?user_id=${id}`)
+        fetch(`https://api-phitbook.vercel.app/authore/usermore/?user_id=${id}`)
             .then(response => response.json())
             .then(data => {
                 setUsermore(data);
@@ -21,7 +21,7 @@ const HomeProfile = () => {
         const id = sessionStorage.getItem('id');
 
         // Second fetch for user data
-        fetch(`https://api-phitbook.onrender.com/authore/user/${id}/`)
+        fetch(`https://api-phitbook.vercel.app/authore/user/${id}/`)
             .then(response => response.json())
             .then(data => {
 

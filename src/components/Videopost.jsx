@@ -15,7 +15,7 @@ const Videopost = () => {
     const handleOpen = () => setOpen(!open);
 
     useEffect(() => {
-        fetch(`https://api-phitbook.onrender.com/post/allpost/?image_null=true&video_not_null=true`)
+        fetch(`https://api-phitbook.vercel.app/post/allpost/?image_null=true&video_not_null=true`)
             .then(res => res.json())
             .then(data => setvideo(data))
     }, [datareload])
@@ -25,7 +25,7 @@ const Videopost = () => {
         const id = sessionStorage.getItem('id');
         setId(id);
 
-        fetch(`https://api-phitbook.onrender.com/authore/usermore/?user_id=${id}`)
+        fetch(`https://api-phitbook.vercel.app/authore/usermore/?user_id=${id}`)
             .then(response => response.json())
             .then(data => {
                 setUser(data)

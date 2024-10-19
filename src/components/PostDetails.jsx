@@ -35,7 +35,7 @@ const PostDetails = () => {
         const userid = sessionStorage.getItem('id')
         setUsrid(userid)
         // console.log('userid', userid);
-        fetch(`https://api-phitbook.onrender.com/post/allpost/${id}/`)
+        fetch(`https://api-phitbook.vercel.app/post/allpost/${id}/`)
             .then(response => response.json())
             .then(data => setData(data))
     }, [id, postdatarelode]);
@@ -43,14 +43,14 @@ const PostDetails = () => {
     const [likes, setLikes] = useState([])
     useEffect(() => {
 
-        fetch(`https://api-phitbook.onrender.com/post/likes/?post_id=${id}`)
+        fetch(`https://api-phitbook.vercel.app/post/likes/?post_id=${id}`)
             .then(response => response.json())
             .then(data => setLikes(data))
     }, [id, postdatarelode]);
 
     const enterLike = (id) => {
         if (sessionStorage.getItem('token') != null) {
-            fetch(`https://api-phitbook.onrender.com/post/likes/?post_id=${id}`, {
+            fetch(`https://api-phitbook.vercel.app/post/likes/?post_id=${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ const PostDetails = () => {
 
 
         if (sessionStorage.getItem('token') != null) {
-            fetch(`https://api-phitbook.onrender.com/post/allcomment/`, {
+            fetch(`https://api-phitbook.vercel.app/post/allcomment/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ const PostDetails = () => {
 
     const [categoryto, setCategoryto] = useState([]);
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/category/all/')
+        fetch('https://api-phitbook.vercel.app/category/all/')
             .then(response => response.json())
             .then(data => setCategoryto(data))
 
@@ -164,7 +164,7 @@ const PostDetails = () => {
 
 
     const EditComment = (id) => {
-        fetch(`https://api-phitbook.onrender.com/post/allcomment/?comment_id=${id}`)
+        fetch(`https://api-phitbook.vercel.app/post/allcomment/?comment_id=${id}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data[0]);
@@ -187,7 +187,7 @@ const PostDetails = () => {
         formData.append('user', edituser)
 
 
-        fetch(`https://api-phitbook.onrender.com/post/allcomment/?comment_id=${id}`, {
+        fetch(`https://api-phitbook.vercel.app/post/allcomment/?comment_id=${id}`, {
             method: 'PUT',
             // headers: {
             //     'Content-Type': 'application/json',
@@ -205,7 +205,7 @@ const PostDetails = () => {
 
 
     const deleteCmt = (id) => {
-        fetch(`https://api-phitbook.onrender.com/post/allcomment/?comment_id=${id}`, {
+        fetch(`https://api-phitbook.vercel.app/post/allcomment/?comment_id=${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Token ${sessionStorage.getItem('token')}`,

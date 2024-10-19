@@ -19,7 +19,7 @@ const Mypost = () => {
     const [postdata, setPostdata] = useState('')
     const [datareload, setDatareload] = useState(false)
     useEffect(() => {
-        fetch(`https://api-phitbook.onrender.com/post/allpost/?user_id=${sessionStorage.getItem('id')}`)
+        fetch(`https://api-phitbook.vercel.app/post/allpost/?user_id=${sessionStorage.getItem('id')}`)
             .then(res => res.json())
             .then(data => setPostdata(data))
     }, [datareload])

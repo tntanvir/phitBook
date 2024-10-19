@@ -5,7 +5,7 @@ const LikeCount = ({ id, bool }) => {
     const [likes, setLikes] = useState([])
     useEffect(() => {
 
-        fetch(`https://api-phitbook.onrender.com/post/likes/?post_id=${id}`)
+        fetch(`https://api-phitbook.vercel.app/post/likes/?post_id=${id}`)
             .then(response => response.json())
             .then(data => setLikes(data))
     }, [id, bool]);

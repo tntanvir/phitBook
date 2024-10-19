@@ -27,7 +27,7 @@
 //     const handleFollow = async (username) => {
 //         console.log(username);
 //         try {
-//             const response = await fetch(`https://api-phitbook.onrender.com/authore/user/${username}/follow/`, {
+//             const response = await fetch(`https://api-phitbook.vercel.app/authore/user/${username}/follow/`, {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -71,7 +71,7 @@
 //     // useEffect(() => {
 //     //     const followStatus = () => {
 
-//     //         fetch(`https://api-phitbook.onrender.com/authore/user/${username}/follow-status/`, {
+//     //         fetch(`https://api-phitbook.vercel.app/authore/user/${username}/follow-status/`, {
 //     //             method: 'GET',
 //     //             headers: {
 //     //                 'Content-Type': 'application/json',
@@ -91,7 +91,7 @@
 //         console.log(username);
 //         let status = null;
 
-//         fetch(`https://api-phitbook.onrender.com/authore/user/${username}/follow-status/`, {
+//         fetch(`https://api-phitbook.vercel.app/authore/user/${username}/follow-status/`, {
 //             method: 'GET',
 //             headers: {
 //                 'Content-Type': 'application/json',
@@ -217,7 +217,7 @@ const Follow = ({ data, following, followers }) => {
     const handleFollow = async (username) => {
         // console.log(username);
         try {
-            const response = await fetch(`https://api-phitbook.onrender.com/authore/user/${username}/follow/`, {
+            const response = await fetch(`https://api-phitbook.vercel.app/authore/user/${username}/follow/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -267,7 +267,7 @@ const Follow = ({ data, following, followers }) => {
                 const statuses = {};
                 for (const user of followers) {
                     try {
-                        const response = await fetch(`https://api-phitbook.onrender.com/authore/user/${user?.follower?.username}/follow-status/`, {
+                        const response = await fetch(`https://api-phitbook.vercel.app/authore/user/${user?.follower?.username}/follow-status/`, {
                             method: 'GET',
                             headers: {
                                 'Content-Type': 'application/json',

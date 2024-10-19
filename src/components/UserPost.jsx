@@ -10,10 +10,10 @@ const UserPost = ({ id }) => {
 
         const fetchUser = async () => {
             try {
-                const res1 = await fetch(`https://api-phitbook.onrender.com/authore/user/${id}/`);
+                const res1 = await fetch(`https://api-phitbook.vercel.app/authore/user/${id}/`);
                 const userData = await res1.json();
 
-                const res2 = await fetch(`https://api-phitbook.onrender.com/authore/usermore/?user_id=${id}`);
+                const res2 = await fetch(`https://api-phitbook.vercel.app/authore/usermore/?user_id=${id}`);
                 const userMoreData = await res2.json();
                 const combinedData = { ...userData, ...userMoreData };
 

@@ -51,7 +51,7 @@ export function MultiLevelSidebar() {
 
     const [category, setCategory] = useState(null)
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/category/all/')
+        fetch('https://api-phitbook.vercel.app/category/all/')
             .then(response => response.json())
             .then(data => setCategory(data))
 
@@ -61,14 +61,14 @@ export function MultiLevelSidebar() {
 
 
     useEffect(() => {
-        fetch(`https://api-phitbook.onrender.com/post/allpost/?image_null=true&video_not_null=true`)
+        fetch(`https://api-phitbook.vercel.app/post/allpost/?image_null=true&video_not_null=true`)
             .then(res => res.json())
             .then(data => setvideo(data))
     }, [])
     const [post, setPost] = useState(null)
 
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/post/allpost/')
+        fetch('https://api-phitbook.vercel.app/post/allpost/')
             .then(response => response.json())
             .then(data => setPost(data))
 
@@ -85,7 +85,7 @@ export function MultiLevelSidebar() {
 
 
     const singout = () => {
-        fetch('https://api-phitbook.onrender.com/authore/logout/')
+        fetch('https://api-phitbook.vercel.app/authore/logout/')
             .then(() => {
                 sessionStorage.removeItem('id');
                 sessionStorage.removeItem('token');
@@ -96,7 +96,7 @@ export function MultiLevelSidebar() {
 
     const [FPost, setFPost] = useState()
     useEffect(() => {
-        fetch('https://api-phitbook.onrender.com/post/posts/following/', {
+        fetch('https://api-phitbook.vercel.app/post/posts/following/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
