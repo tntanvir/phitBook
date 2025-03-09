@@ -21,7 +21,7 @@ const FollowStatasIcon = ({ username }) => {
             if (response.ok) {
                 toast.success(data.message, {
                     position: "top-right",
-                    autoClose: 5000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: false,
@@ -34,7 +34,7 @@ const FollowStatasIcon = ({ username }) => {
             } else {
                 toast.error(data.error, {
                     position: "top-right",
-                    autoClose: 5000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: false,

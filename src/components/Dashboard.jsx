@@ -25,8 +25,9 @@ import axios from 'axios';
 import { RiMenuUnfoldLine } from 'react-icons/ri';
 import { IoArrowForwardOutline } from 'react-icons/io5';
 import Follow from './Follow';
+import { Link } from 'react-router-dom';
 
-const Dashboard = () => {
+const Dashboard = ({ load, setLoad }) => {
     const [main, setMain] = useState([])
     const [datareload, setDatareload] = useState(false)
 
@@ -116,6 +117,7 @@ const Dashboard = () => {
             .then(data => {
                 handleOpen()
                 setDatareload(!datareload)
+                setLoad(!load)
             })
 
     }
@@ -173,45 +175,23 @@ const Dashboard = () => {
     }, [datareload])
 
     return (
-        <div className='flex dark:bg-black dark:text-white'>
+        <div className=' dark:bg-black dark:text-white'>
 
 
-            <div className='hidden md:block w-1/5 border-r'>
 
-                <Layout />
-            </div>
-            <div className='w-full'>
-                <div className=' w-full  pl-3 '>
-                    <RiMenuUnfoldLine onClick={openDrawer} className='md:hidden text-2xl' />
+            <div className=''>
 
-                </div>
                 {
                     main &&
-                    <div className='flex md:flex-row flex-col md:gap-10  min-h-screen pt-10 pl-10  w-full'>
-                        <div className='flex   flex-col gap-2 items-center'>
+                    <div className='  '>
 
-                            <div className='border-4 border-primary h-52 w-52 flex justify-center items-center overflow-hidden rounded-full'>
-                                <img src={main.image} alt="" className='h-full w-full object-cover' loading='lazy' />
-                            </div>
-                            <h1 className='text-3xl'>{main.first_name} {main.last_name}</h1>
-                        </div>
 
-                        <div className='flex flex-col md:gap-16 gap-5  '>
-                            <div className='w-full '>
-                                <h1 className='flex gap-2 items-center md:text-2xl'><FaUser /> {main.username}</h1>
-                                <p className='flex gap-2 items-center md:text-2xl text-wrap '> <MdEmail /> {main.email}</p>
-                                <p className='flex gap-2 items-center md:text-2xl'><FaPhoneAlt /> {main.phone_number}</p>
-                                <p className='flex gap-2 items-center md:text-2xl'><FaLocationDot /> {main.location}</p>
+                        <div className='  '>
 
-                                <div className='mt-6'>
-                                    {
-                                        data && following && followers && <Follow data={data} followers={followers} following={following} />
-                                    }
-                                </div>
-                            </div>
                             <div className='flex gap-2'>
                                 <Button className='flex justify-center items-center gap-1' color='blue' onClick={() => oldData(main.user)}><MdEdit className='text-xl' /> Edit profile</Button>
                                 <Button className='flex justify-center items-center gap-1' color='blue' onClick={singout}>singout <IoArrowForwardOutline className='text-xl' /></Button>
+                                <Link to='/dashboard/addpost'><Button className='flex justify-center items-center gap-1' color='blue' >Add Post <IoArrowForwardOutline className='text-xl' /></Button></Link>
 
 
                             </div>
@@ -276,30 +256,7 @@ const Dashboard = () => {
                     }
                 </DialogFooter>
             </Dialog>
-            <><Drawer open={opendawer} onClose={closeDrawer} className="p-4">
-                <div className="mb-6 flex items-center justify-between">
-                    {/* <Typography variant="h5" color="blue-gray">
-                        Material Tailwind
-                    </Typography> */}
-                    <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                            stroke="currentColor"
-                            className="h-5 w-5"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M6 18L18 6M6 6l12 12"
-                            />
-                        </svg>
-                    </IconButton>
-                </div>
-                <Layout />
-            </Drawer></>
+
 
         </div>
     );

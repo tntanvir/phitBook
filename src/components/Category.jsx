@@ -50,10 +50,10 @@ const Category = () => {
     return (
         <div className='flex min-h-screen dark:bg-black dark:text-white'>
 
-            <div className='hidden md:block w-1/5 border-r'>
+            {/* <div className='hidden md:block w-1/5 border-r'>
 
                 <Layout />
-            </div>
+            </div> */}
             <div className='w-full '>
                 <div className=' w-full  pl-3 '>
                     <RiMenuUnfoldLine onClick={openDrawer} className='md:hidden text-2xl' />

@@ -22,6 +22,8 @@ import { toast, Bounce } from 'react-toastify';
 import { Menu } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 import YouTubeVideo from './YouTubeVideo';
+import { IoSend } from 'react-icons/io5';
+import { FaComment } from 'react-icons/fa6';
 
 const PostDetails = () => {
     const { id } = useParams();
@@ -65,12 +67,23 @@ const PostDetails = () => {
                 .then(data => {
                     setPostdatarelode(!postdatarelode)
                     // console.log(data)
+                    toast.success('Request Successfull', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce,
+                    })
                 })
         }
         else {
             toast.error('Login please', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: false,
@@ -110,12 +123,23 @@ const PostDetails = () => {
                 .then(data => {
                     setPostdatarelode(!postdatarelode)
                     setComtext('')
+                    toast.success('Successfully comment added', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce,
+                    })
                 })
         }
         else {
             toast.error('Login please', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: false,
@@ -199,6 +223,17 @@ const PostDetails = () => {
                 handleOpen()
                 // window.location.reload()
                 setPostdatarelode(!postdatarelode)
+                toast.success('Edit Successfull', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                })
             })
 
     }
@@ -212,6 +247,17 @@ const PostDetails = () => {
             },
         }).then(res => {
             setPostdatarelode(!postdatarelode)
+            toast.success('Delete Successfull', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            })
         })
     }
 
@@ -226,21 +272,22 @@ const PostDetails = () => {
         <>
             <div className='flex md:flex-row flex-col md:p-2 gap-2 p-3 min-h-screen dark:bg-black dark:text-gray-300'>
                 <div className='  w-full  '>
+
                     <div className='h-full'>
-                        <>
-                            {data.image && <img src={data?.image} alt="" className='rounded-lg' />
-
-
-
-                            }
-                        </>
-                        {data.video && <YouTubeVideo videoUrl={data?.video} />}
-
-
+                        {data.image ? (
+                            <img src={data.image} alt="" className='rounded-lg' />
+                        ) : data.video ? (
+                            <YouTubeVideo videoUrl={data.video} />
+                        ) : (
+                            <div className="w-full">
+                                <div className="h-[85vh] animate-pulse bg-gray-300 dark:bg-gray-700 rounded-lg min-h-[200px]"></div>
+                            </div>
+                        )}
                     </div>
+
                 </div>
-                <div className='flex flex-col gap-2 md:w-1/3 w-full max-h-screen overflow-y-scroll hide-scrollbar  p-2'>
-                    <div className=''>
+                {data ? <div className='flex flex-col gap-2 md:w-1/3 w-full max-h-screen overflow-y-scroll hide-scrollbar  p-2'>
+                    <div className=' max-h-[75vh] overflow-y-scroll hide-scrollbar'>
                         <div>
                             {data.user && <UserPost id={data.user} />}
                         </div>
@@ -263,29 +310,17 @@ const PostDetails = () => {
                             <p className='text-justify'>{data.discription}</p>
                             <div className='flex justify-start items-start flex-col'>
 
-                                <div className='text-4xl flex gap-2'>
+                                <div className='flex gap-5 items-center'>
+                                    <div className='text-4xl flex gap-2'>
 
-                                    <FcLike onClick={() => enterLike(data.id)} className='hover:cursor-pointer hover:scale-110 duration-150' /> {likes && likes.length}
-                                </div>
-                                <form className="max-w-screen-lg w-full flex justify-center items-center ">
-                                    <div className=" flex flex-col justify-center items-center">
-
-                                        <Input
-                                            size="lg"
-                                            placeholder="Enter Text"
-                                            className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:bg-black dark:text-gray-300"
-                                            labelProps={{
-                                                className: "before:content-none after:content-none",
-                                            }}
-                                            onChange={(e) => setComtext(e.target.value)}
-                                        />
-
+                                        <FcLike onClick={() => enterLike(data.id)} className='hover:cursor-pointer hover:scale-110 duration-150' /> {likes && likes.length}
                                     </div>
+                                    <div className='text-4xl flex gap-2'>
 
-                                    <Button className="" fullWidth onClick={() => SubmitBtn()}>
-                                        Submit
-                                    </Button>
-                                </form>
+                                        <FaComment className='' /> {data?.comments && (data?.comments)?.length}
+                                    </div>
+                                </div>
+
                             </div>
                             <div className='flex gap-2 flex-col'>
                                 {data.comments && (data.comments).map((e, i) => (
@@ -317,7 +352,35 @@ const PostDetails = () => {
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <form className="max-w-screen-lg gap-2 w-full flex justify-between items-center ">
+                            <div className=" flex flex-col justify-center items-center">
+
+                                <Input
+                                    size="xs"
+                                    placeholder="Enter Text"
+                                    className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:bg-black dark:text-gray-300 dark:placeholder:text-gray-300"
+                                    labelProps={{
+                                        className: "before:content-none after:content-none",
+                                    }}
+                                    value={comtext}
+                                    onChange={(e) => setComtext(e.target.value)}
+                                />
+
+                            </div>
+
+                            <div className="text-2xl p-3 bg-blue-400 rounded-full text-white" onClick={() => SubmitBtn()}>
+                                <IoSend />
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
+                    :
+                    <div className="w-96">
+                        <div className="h-[85vh] animate-pulse bg-gray-300 dark:bg-gray-700 rounded-lg min-h-[200px]"></div>
+                    </div>
+                }
             </div >
 
 

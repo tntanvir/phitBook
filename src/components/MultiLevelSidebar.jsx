@@ -20,13 +20,10 @@ import { useContext } from "react";
 import { MyContext } from "../App";
 const Pages = [
     {
-        path: '/dashboard',
+        path: `/profile/${sessionStorage.getItem('username')}`,
         text: 'Profile',
     },
-    {
-        path: '/dashboard/mypost',
-        text: 'My Post',
-    },
+
     {
         path: '/dashboard/addpost',
         text: 'Add Post'

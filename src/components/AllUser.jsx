@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const AllUser = () => {
     const [userData, setUserData] = useState([]);
     const [usermoreData, setUsermoreData] = useState([]);
-    const [combinedData, setCombinedData] = useState([]);
+    const [combinedData, setCombinedData] = useState();
 
     useEffect(() => {
 
@@ -54,35 +54,59 @@ const AllUser = () => {
                 <div className=''>
                     <MultiLevelSidebar />
                 </div>
-                <div className='flex flex-wrap gap-3 justify-center w-full'>
-                    {combinedData.map((user) => (
-                        <div key={user.id} className='w-1/4 min-h-52  '>
-                            <div className='border-2 border-gray-300 rounded-md overflow-hidden h-full flex flex-col justify-between'>
-                                <Link to={`/profile/${user.username}`}>
+                {
+                    combinedData ?
 
-                                    <div className='min-h-52 max-h-52 overflow-hidden '>
-                                        {user.image ? <img
-                                            src={user.image}
-                                            alt={user.username}
-                                            className='w-full h-full object-cover rounded-t-md'
-                                            onError={(e) => e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010'}
-                                        /> :
+                        (<div className='flex flex-wrap gap-3 justify-center w-full'>
+                            {combinedData.map((user) => (
+                                <div key={user.id} className='w-1/4 min-h-52  '>
+                                    <div className='border-2 border-gray-300 rounded-md overflow-hidden h-full flex flex-col justify-between'>
+                                        <Link to={`/profile/${user.username}`}>
 
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010" alt="not load" />
-                                        }
+                                            <div className='min-h-52 max-h-52 overflow-hidden '>
+                                                {user.image ? <img
+                                                    src={user.image}
+                                                    alt={user.username}
+                                                    className='w-full h-full object-cover rounded-t-md'
+                                                    onError={(e) => e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010'}
+                                                /> :
+
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010" alt="not load" />
+                                                }
+                                            </div>
+                                            <div className='p-2 text-center'>
+                                                <h3 className='text-lg font-semibold'>{user.username}</h3>
+                                                <p className='text-sm text-gray-600'>{user.location}</p>
+                                            </div>
+                                        </Link>
+                                        <div className='text-center '>
+                                            <FollowStatas username={user.username} />
+                                        </div>
                                     </div>
-                                    <div className='p-2 text-center'>
-                                        <h3 className='text-lg font-semibold'>{user.username}</h3>
-                                        <p className='text-sm text-gray-600'>{user.location}</p>
-                                    </div>
-                                </Link>
-                                <div className='text-center '>
-                                    <FollowStatas username={user.username} />
                                 </div>
+                            ))}
+                        </div>)
+                        : (
+                            <div className="flex flex-wrap gap-3 justify-center w-full animate-pulse">
+                                {[...Array(6)].map((_, index) => (
+                                    <div key={index} className="w-1/4 min-h-52">
+                                        <div className="border-2 border-gray-300 rounded-md overflow-hidden h-full flex flex-col justify-between">
+                                            <div className="min-h-52 max-h-52 overflow-hidden bg-gray-300"></div>
+                                            <div className="p-2 text-center">
+                                                <div className="h-6 w-24 bg-gray-300 rounded mx-auto mb-2"></div>
+                                                <div className="h-4 w-32 bg-gray-300 rounded mx-auto"></div>
+                                            </div>
+                                            <div className="text-center">
+                                                <div className="h-8 w-24 bg-gray-300 rounded mx-auto mb-2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        </div>
-                    ))}
-                </div>
+
+                        )
+
+                }
             </div>
 
         </div >

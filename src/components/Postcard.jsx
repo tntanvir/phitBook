@@ -10,18 +10,15 @@ import {
     MenuHandler,
     MenuList,
     MenuItem,
-    input,
-} from "@material-tailwind/react";
-import { IoMdCloseCircle } from "react-icons/io";
-import { toast, Bounce } from 'react-toastify';
-
-import {
-
     Dialog,
     DialogHeader,
     DialogBody,
     DialogFooter,
+
 } from "@material-tailwind/react";
+import { IoMdCloseCircle } from "react-icons/io";
+import { toast, Bounce } from 'react-toastify';
+
 
 import { Link } from "react-router-dom";
 import { Chip } from "@material-tailwind/react";
@@ -93,7 +90,6 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
     const [option, setOption] = useState([])
 
 
-    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -295,7 +291,7 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
     }
 
     return (
-        <div className="flex flex-col-reverse items-center md:p-0 p-4">
+        <div className="w-full flex flex-col-reverse items-center pt-2 md:p-0">
 
 
             {post && post.map((e, i) => (
