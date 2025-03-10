@@ -20,6 +20,9 @@ import { RxVideo } from "react-icons/rx";
 import { SlUserFollowing } from "react-icons/sl";
 import { IoHomeOutline } from "react-icons/io5";
 import { RiUserFollowLine } from "react-icons/ri";
+import { FaUserFriends } from "react-icons/fa";
+import { LiaUserFriendsSolid } from "react-icons/lia";
+import { Tooltip } from "@material-tailwind/react";
 function NavList() {
     const [userid, setUserid] = useState('')
     const { state, setState } = useContext(MyContext);
@@ -165,7 +168,8 @@ export function NavbarSimple() {
     }
 
     return (
-        <Navbar className="mx-auto max-w-screen px-6 py-3 rounded-none shadow-none blur-none sticky top-0 z-50 dark:bg-black border-t-0 border-l-0 border-r-0 border-b dark:border-gray-50/10 border-gray-300/50 ">
+        <Navbar className="mx-auto m-0 px-2 md:px-6  py-3 rounded-none shadow-none blur-none sticky top-0 z-50 dark:bg-black border-t-0 border-l-0 border-r-0 border-b dark:border-gray-50/10 border-gray-300/50 " style={{ minWidth: '100%' }}>
+
             <div className="flex items-center justify-between text-blue-gray-900">
                 <div className="flex gap-3 justify-center items-center">
                     <Link to='/'
@@ -220,48 +224,79 @@ export function NavbarSimple() {
 
                         </div>
                         <div className="flex justify-center items-center gap-5">
-                            <Typography
-                                as="li"
-                                variant="small"
-                                color="blue-gray"
-                                className="p-1 font-medium hidden md:flex"
-                            >
-                                <Link to='/' className="flex items-center hover:text-blue-500 transition-colors md:hidden ">
-                                    home
-                                </Link>
-                                <Link to='/' className="hidden md:flex items-center hover:text-blue-500 dark:hover:text-blue-500 transition-colors dark:text-gray-200">
-                                    <IoHomeOutline className="text-3xl " />
-                                </Link>
+                            <Tooltip content="Home" className='bg-blue-700'>
+                                <Typography
+                                    as="li"
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="p-1 font-medium hidden md:flex"
+                                >
+                                    <Link to='/' className="flex items-center hover:text-blue-500 transition-colors md:hidden ">
+                                        home
+                                    </Link>
+                                    <Link to='/' className="hidden md:flex items-center hover:text-blue-500 dark:hover:text-blue-500 transition-colors dark:text-gray-200">
+                                        <IoHomeOutline className="text-3xl " />
+                                    </Link>
 
-                            </Typography>
-                            {data && <Typography
-                                as="li"
-                                variant="small"
-                                color="blue-gray"
-                                className="p-1 font-medium hidden md:flex"
-                            >
-                                <Link to='/followingpost' className="flex items-center hover:text-blue-500 transition-colors md:hidden ">
-                                    FollowPost
-                                </Link>
-                                <Link to='/followingpost' className="hidden md:flex items-center hover:text-blue-500 dark:hover:text-blue-500 transition-colors dark:text-gray-200">
-                                    <RiUserFollowLine className="text-3xl " />
-                                </Link>
+                                </Typography>
+                            </Tooltip>
 
-                            </Typography>}
-                            <Typography
-                                as="li"
-                                variant="small"
-                                color="blue-gray"
-                                className="p-1 font-medium hidden md:flex"
-                            >
-                                <Link to='/video' className="flex items-center hover:text-blue-500 transition-colors md:hidden ">
-                                    video
-                                </Link>
-                                <Link to='/video' className="hidden md:flex items-center hover:text-blue-500 dark:hover:text-blue-500 transition-colors dark:text-gray-200">
-                                    <RxVideo className="text-3xl " />
-                                </Link>
+                            {data && <Tooltip content="Follow Post" className='bg-blue-700'>
+                                <Typography
+                                    as="li"
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="p-1 font-medium hidden md:flex"
+                                >
+                                    <Link to='/followingpost' className="flex items-center hover:text-blue-500 transition-colors md:hidden ">
+                                        FollowPost
+                                    </Link>
+                                    <Link to='/followingpost' className="hidden md:flex items-center hover:text-blue-500 dark:hover:text-blue-500 transition-colors dark:text-gray-200">
+                                        <RiUserFollowLine className="text-3xl " />
+                                    </Link>
 
-                            </Typography>
+                                </Typography>
+                            </Tooltip>
+                            }
+                            <Tooltip content="Video" className='bg-blue-700'>
+
+                                <Typography
+                                    as="li"
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="p-1 font-medium hidden md:flex"
+                                >
+                                    <Link to='/video' className="flex items-center hover:text-blue-500 transition-colors md:hidden ">
+                                        video
+                                    </Link>
+                                    <Link to='/video' className="hidden md:flex items-center hover:text-blue-500 dark:hover:text-blue-500 transition-colors dark:text-gray-200">
+                                        <RxVideo className="text-3xl " />
+                                    </Link>
+
+                                </Typography>
+                            </Tooltip>
+                            <Tooltip content="Find Friend" className='bg-blue-700'>
+
+                                <Typography
+                                    as="li"
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="p-1 font-medium hidden md:flex"
+                                >
+                                    <Link to='/explore' className="flex items-center hover:text-blue-500 transition-colors md:hidden ">
+                                        Find Friend
+                                    </Link>
+                                    <Link to='/explore' className="hidden md:flex items-center hover:text-blue-500 dark:hover:text-blue-500 transition-colors dark:text-gray-200">
+                                        <Tooltip content="Material Tailwind">
+
+                                            <LiaUserFriendsSolid className="text-4xl " />
+                                        </Tooltip>
+                                    </Link>
+
+                                </Typography>
+                            </Tooltip>
+
+
                         </div>
                     </div>
 

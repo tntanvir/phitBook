@@ -32,6 +32,8 @@ import { MultiLevelSidebar } from './MultiLevelSidebar';
 import HomeProfile from './HomeProfile';
 import UserSuggest from './UserSuggest';
 import FollowingPost from './FollowingPost';
+import Addpost from './Addpost';
+import Addhomepost from './Addhomepost';
 
 
 
@@ -39,8 +41,7 @@ import FollowingPost from './FollowingPost';
 const Home = () => {
     const [gThem, setGThem] = useContext(MyContext);
 
-    const [videobool, setVideobool] = useState(true)
-    const [videourl, setVideourl] = useState(null)
+
 
 
 
@@ -94,6 +95,8 @@ const Home = () => {
     const [discription, setDiscription] = useState('')
     const [categorys, setCategorys] = useState('')
     const [option, setOption] = useState([])
+    const [videobool, setVideobool] = useState(true)
+    const [videourl, setVideourl] = useState(null)
     useEffect(() => {
         fetch('https://api-phitbook.vercel.app/category/all/')
             .then(res => res.json())
@@ -129,9 +132,9 @@ const Home = () => {
                         formData.append('discription', discription);
                         category.forEach(catId => formData.append('category', catId));
 
-                        formData.forEach((value, key) => {
-                            console.log(`${key}: ${value}`);
-                        });
+                        // formData.forEach((value, key) => {
+                        //     console.log(`${key}: ${value}`);
+                        // });
 
                         const response = await fetch('https://api-phitbook.vercel.app/post/allpost/', {
                             method: 'POST',
@@ -163,9 +166,9 @@ const Home = () => {
             formData.append('discription', discription);
             category.forEach(catId => formData.append('category', catId));
 
-            formData.forEach((value, key) => {
-                console.log(`${key}: ${value}`);
-            });
+            // formData.forEach((value, key) => {
+            //     console.log(`${key}: ${value}`);
+            // });
 
             const response = await fetch('https://api-phitbook.vercel.app/post/allpost/', {
                 method: 'POST',
@@ -180,7 +183,7 @@ const Home = () => {
             if (data.errors) {
                 console.log('error', data.errors);
             } else {
-                console.log(data);
+                // console.log(data);
                 navigate('/dashboard/mypost')
             }
         }
@@ -194,15 +197,15 @@ const Home = () => {
             <div className='hidden md:block'>
                 <MultiLevelSidebar />
             </div>
-            <div className='flex flex-col items-center w-full ' >
+            <div className='flex flex-col items-center justify-center w-full ' >
                 <div className='hide-scrollbar h-screen  w-fit pb-20'>
 
-                    <div className="absolute inset-0 -z-10 min-h-screen md:w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
+                    {/* <div className="absolute inset-0 -z-10 min-h-screen md:w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div> */}
                     {sessionStorage.getItem('id') &&
                         <div className='bg-gray-200/50 rounded-md md:p-4 dark:bg-transparent dark:border w-full dark:border-gray-500/50 ' onClick={handleOpen}>
 
 
-                            <div className='flex gap-3  items-center '>
+                            <div className='flex md:gap-3  items-center '>
                                 <div className='w-1/12' >
                                     <Link to={`/profile/${sessionStorage.getItem('username')}`}>
                                         <Avatar src={user?.image} alt="avatar" size="sm" className="border border-primary" />
@@ -215,7 +218,7 @@ const Home = () => {
                             </div>
                         </div>}
 
-                    {Post ? <Postcard post={Post} datareload={datareload} setDatareload={setDatareload} /> : (<div className="mt-6 md:w-[40rem] w-full shadow-lg bg-gray-200/50 dark:bg-gray-800 dark:border dark:border-gray-700 animate-pulse p-4 rounded-lg">
+                    {Post ? <Postcard post={Post} datareload={datareload} setDatareload={setDatareload} /> : (<div className="mt-6 md:w-[40rem] w-96  shadow-lg bg-gray-200/50 dark:bg-gray-800 dark:border dark:border-gray-700 animate-pulse p-4 rounded-lg">
                         {/* User Info Skeleton */}
                         <div className="flex justify-between items-center mb-3">
                             <div className="flex items-center gap-3">
@@ -272,7 +275,7 @@ const Home = () => {
                     <div className="w-full max-h-screen dark:bg-[#3a3b3c]  dark:text-white">
                         <DialogHeader className='dark:bg-[#3a3b3c]  dark:text-white'>Add Post</DialogHeader>
                         <DialogBody className="hide-scrollbar max-h-[80vh]">
-                            <div className="">
+                            {/* <div className="">
                                 <Card className='w-full shadow-none dark:bg-[#3a3b3c] dark:text-white'>
 
 
@@ -366,7 +369,8 @@ const Home = () => {
 
                                     </form>
                                 </Card>
-                            </div>
+                            </div> */}
+                            <Addhomepost />
                         </DialogBody>
                         <DialogFooter>
                             {/* Footer content */}

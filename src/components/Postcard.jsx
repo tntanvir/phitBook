@@ -291,11 +291,11 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
     }
 
     return (
-        <div className="w-full flex flex-col-reverse items-center pt-2 md:p-0">
+        <div className=" flex flex-col-reverse items-center pt-2 md:p-0">
 
 
             {post && post.map((e, i) => (
-                <Card key={i} className="mt-6 md:w-[40rem] w-full shadow-lg bg-gray-200/50 dark:bg-transparent dark:border-x dark:border-b dark:border-gray-50/50 dark:text-gray-300">
+                <Card key={i} className="mt-6 md:w-[40rem] w-96  shadow-lg bg-gray-200/50 dark:bg-transparent dark:border-x dark:border-b dark:border-gray-50/50 dark:text-gray-300 ">
 
 
                     {/* <UserPost id={e.user} /> */}
@@ -327,6 +327,7 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
                             src={e.image}
                             alt="card-image"
                             loading="lazy"
+                            className="w-full"
                         /> :
                             <YouTubeVideo videoUrl={e.video} />}
 
@@ -517,6 +518,8 @@ const Postcard = ({ post, type, datareload, setDatareload }) => {
             </>
 
         </div>
+
+
     );
 };
 

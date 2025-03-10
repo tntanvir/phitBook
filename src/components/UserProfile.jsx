@@ -44,6 +44,7 @@ const UserProfile = () => {
     const [main, setMain] = useState(null)
     const [data, setData] = useState(null)
     const [load, setLoad] = useState(false)
+    const [datareloads, setDatareloads] = useState(true)
 
     const [open, setOpen] = useState(false);
 
@@ -85,7 +86,7 @@ const UserProfile = () => {
 
 
 
-    }, [username, load]);
+    }, [username, load, datareloads]);
 
 
     const [dataopen, setDataopen] = useState(null)
@@ -405,7 +406,7 @@ const UserProfile = () => {
                 .then(data => {
                     // console.log(data)
                     handleOpen2()
-                    setDatareload(!datareload)
+                    setDatareloads(!datareloads)
 
                 })
         }
@@ -413,46 +414,99 @@ const UserProfile = () => {
             console.log(err);
         }
     }
+    const deletePost = (id) => {
+        fetch(`https://api-phitbook.vercel.app/post/allpost/${id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Token ${sessionStorage.getItem('token')}`,
+            },
+        }).then(data => {
+            // console.log(data)
+            setDatareloads(!datareloads)
+            handleOpen()
+        })
+    }
 
     return (
-        <div className='min-h-screen dark:bg-black dark:text-gray-300 pt-4'>
+        <div className='min-h-screen dark:bg-black text-black dark:text-gray-300 pt-4'>
             {<div>
                 <div>
                     {main ?
-                        <div className='flex  gap-5 justify-center min-h-72 '>
-                            <div className='w-1/3 flex justify-center'>
-                                <div className='border-4 border-primary h-52 w-52 flex justify-center items-center overflow-hidden rounded-full'>
-                                    <img src={main.image} alt="" className='h-full w-full object-cover' loading='lazy' />
+                        // <div className='flex md:flex-row flex-col  gap-5 justify-center min-h-72 '>
+                        //     <div className='md:w-1/3 flex justify-center'>
+                        //         <div className='border-4 border-primary h-52 w-52 flex justify-center items-center overflow-hidden rounded-full'>
+                        //             <img src={main.image} alt="" className='h-full w-full object-cover' loading='lazy' />
+                        //         </div>
+                        //     </div>
+                        //     <div className='md:w-2/3 flex flex-col gap-5 justify-center items-center'>
+
+                        //         <div className='flex md:flex-row flex-col md:gap-44'>
+                        //             <h1 className='text-xl'>{main.username}</h1>
+                        //             <div>
+                        //                 {token == main.username ?
+
+                        //                     <Dashboard load={load} setLoad={setLoad} />
+
+                        //                     : <div>
+                        //                         {followBool ? <Button size='sm' onClick={handleFollow}>unfollow</Button> : <Button size='sm' onClick={handleFollow}>follow</Button>}
+                        //                     </div>}
+                        //             </div>
+                        //         </div>
+                        //         <div className='bg-red-600 w-full px-3'>
+                        //             <h1 className='text-2xl w-full'>{main.first_name} {main.last_name}</h1>
+                        //             <h1>{main.phone_number}</h1>
+                        //             <h1>{main.location}</h1>
+                        //             <h1>{main.email}</h1>
+                        //         </div>
+
+
+
+                        //         {
+                        //             data && following && followers && <Follow data={data} followers={followers} following={following} />
+                        //         }
+
+                        //     </div>
+
+                        // </div>
+                        <div className="flex flex-col md:flex-row gap-5 justify-center min-h-72 px-4">
+                            {/* Profile Image Section */}
+                            <div className="flex justify-center md:w-1/3">
+                                <div className="border-4 border-primary h-40 w-40 md:h-52 md:w-52 flex justify-center items-center overflow-hidden rounded-full">
+                                    <img src={main.image} alt="" className="h-full w-full object-cover" loading="lazy" />
                                 </div>
                             </div>
-                            <div className='w-2/3 flex flex-col gap-5'>
 
-                                <div className='flex  items-center gap-44'>
-                                    <h1 className='text-xl'>{main.username}</h1>
-                                    {token == main.username ?
-                                        <div className='flex justify-center items-center gap-3'>
+                            {/* User Info Section */}
+                            <div className="md:w-2/3 flex flex-col gap-5 justify-center items-center md:items-start">
+                                {/* Username & Follow Button */}
+                                <div className="flex flex-col md:flex-row md:justify-between md:w-full gap-3 items-center">
+                                    <h1 className="text-xl font-semibold">@{main.username}</h1>
+                                    <div className='md:pr-6'>
+                                        {token === main.username ? (
                                             <Dashboard load={load} setLoad={setLoad} />
-                                        </div>
-                                        : <div>
-                                            {followBool ? <Button size='sm' onClick={handleFollow}>unfollow</Button> : <Button size='sm' onClick={handleFollow}>follow</Button>}
-                                        </div>}
+                                        ) : (
+                                            <Button size="sm" onClick={handleFollow}>
+                                                {followBool ? "Unfollow" : "Follow"}
+                                            </Button>
+                                        )}
+                                    </div>
                                 </div>
-                                <h1 className='text-2xl'>{main.first_name} {main.last_name}</h1>
-                                <div>
+
+                                {/* User Details Section */}
+                                <div className="w-full  md:p-0 p-3 rounded-lg text-black dark:text-gray-300 text-left md:text-left">
+                                    <h1 className="text-2xl font-bold">{main.first_name} {main.last_name}</h1>
                                     <h1>{main.phone_number}</h1>
                                     <h1>{main.location}</h1>
                                     <h1>{main.email}</h1>
                                 </div>
 
-
-
-                                {
-                                    data && following && followers && <Follow data={data} followers={followers} following={following} />
-                                }
-
+                                {/* Follow Info Section */}
+                                {data && following && followers && (
+                                    <Follow data={data} followers={followers} following={following} />
+                                )}
                             </div>
-
                         </div>
+
                         :
                         <div className="flex gap-5 justify-center min-h-72 animate-pulse">
                             <div className="w-1/3 flex justify-center">
@@ -589,7 +643,7 @@ const UserProfile = () => {
 
                                             <div className='flex gap-2 text-2xl'>
                                                 <h1 className='bg-gray-200 p-1 rounded-md hover:bg-green-500 hover:text-white  duration-200 cursor-pointer dark:text-white dark:bg-gray-700 dark:hover:bg-green-500' onClick={() => editpost(postId)}><MdEdit /></h1>
-                                                <h1 className='bg-gray-200 p-1 rounded-md hover:bg-red-500 hover:text-white duration-200 cursor-pointer dark:text-white dark:bg-gray-700 dark:hover:bg-red-500'><MdDelete /></h1>
+                                                <h1 onClick={() => deletePost(postId)} className='bg-gray-200 p-1 rounded-md hover:bg-red-500 hover:text-white duration-200 cursor-pointer dark:text-white dark:bg-gray-700 dark:hover:bg-red-500'><MdDelete /></h1>
                                             </div>
 
 

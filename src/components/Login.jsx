@@ -113,8 +113,8 @@ const Login = () => {
                                 <p> username : fuadvai</p>
                                 <p>password : Tanvir12345678</p>
                             </div>
-                            <div className='flex justify-between items-center'>
-                                <FaCopy className='text-2xl' onClick={() => copyclick()} />
+                            <div className='flex justify-center items-center'>
+                                <FaCopy className='text-2xl cursor-pointer' onClick={() => copyclick()} />
                             </div>
                         </div>
 

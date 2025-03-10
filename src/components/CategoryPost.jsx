@@ -73,7 +73,7 @@ const CategoryPost = () => {
                     <div className="absolute inset-0 -z-10 min-h-screen w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
 
                     {
-                        data ? (<Postcard post={data} />) : (<div className="mt-6 md:w-[40rem] w-full shadow-lg bg-gray-200/50 dark:bg-gray-800 dark:border dark:border-gray-700 animate-pulse p-4 rounded-lg">
+                        data ? (<Postcard post={data} />) : (<div className="mt-6 md:w-[40rem] w-96 shadow-lg bg-gray-200/50 dark:bg-gray-800 dark:border dark:border-gray-700 animate-pulse p-4 rounded-lg">
                             {/* User Info Skeleton */}
                             <div className="flex justify-between items-center mb-3">
                                 <div className="flex items-center gap-3">
@@ -115,7 +115,7 @@ const CategoryPost = () => {
                     }
                 </div>
             </div>
-            <div className='w-full'>
+            <div className='w-full hidden md:block'>
                 <HomeProfile />
                 {id && <UserSuggest />}
             </div>

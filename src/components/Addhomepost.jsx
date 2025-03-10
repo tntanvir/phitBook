@@ -26,7 +26,7 @@ import { Checkbox } from "@material-tailwind/react";
 import YouTubeVideo from "./YouTubeVideo";
 
 
-const Addpost = () => {
+const Addhomepost = () => {
     const [image, setImage] = useState(null)
     const [title, setTitle] = useState('')
     const [discription, setDiscription] = useState('')
@@ -139,22 +139,17 @@ const Addpost = () => {
     const [gThem, setGThem] = useContext(MyContext);
 
     return (
-        <div className='flex min-h-screen dark:bg-black dark:text-white'>
+        <div className='w-full flex min-h-screen dark:bg-black dark:text-white'>
 
             {/* <div className='hidden md:block w-1/5 border-r'>
 
                 <Layout />
             </div> */}
             <div className='w-full '>
-                <div className=' w-full  pl-3 '>
-                    <RiMenuUnfoldLine onClick={openDrawer} className='md:hidden text-2xl' />
 
-                </div>
                 <div className="flex justify-center items-center ">
-                    <Card className='md:w-2/3 p-2 shadow-none border dark:bg-[#3a3b3c] dark:text-white'>
-                        <Typography variant="h4" >
-                            Add Post
-                        </Typography>
+                    <Card className='w-full p-2 shadow-none  rounded-none  dark:bg-[#3a3b3c] dark:text-white'>
+
 
                         <form className="mt-8 mb-2 w-full p-2" onSubmit={imgtoUrl}>
                             <div className="mb-1 flex flex-col gap-6">
@@ -248,35 +243,12 @@ const Addpost = () => {
                         </form>
                     </Card>
                 </div>
-                <Drawer open={opendawer} onClose={closeDrawer} className="p-4">
-                    <div className="mb-6 flex items-center justify-between">
-                        {/* <Typography variant="h5" >
-                        Material Tailwind
-                    </Typography> */}
-                        <IconButton variant="text" onClick={closeDrawer}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={2}
-                                stroke="currentColor"
-                                className="h-5 w-5"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            </svg>
-                        </IconButton>
-                    </div>
-                    <Layout />
-                </Drawer>
+
             </div>
         </div>
     );
 };
 
-export default Addpost;
+export default Addhomepost;
 
 

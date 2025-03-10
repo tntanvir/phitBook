@@ -176,30 +176,16 @@ const Dashboard = ({ load, setLoad }) => {
 
     return (
         <div className=' dark:bg-black dark:text-white'>
+            {
+                main &&
+                <div className='flex  flex-wrap gap-2'>
+                    <Button size='xs' className='p-1 md:p-3  flex justify-center items-center gap-1' color='blue' onClick={() => oldData(main.user)}><MdEdit className='text-xl' /> Edit profile</Button>
+                    <Button size='xs' className='p-1 md:p-3  flex justify-center items-center gap-1' color='blue' onClick={singout}>singout <IoArrowForwardOutline className='text-xl' /></Button>
+                    <Link to='/dashboard/addpost'><Button size='xs' className='p-1 md:p-3  flex justify-center items-center gap-1' color='blue' >Add Post <IoArrowForwardOutline className='text-xl' /></Button></Link>
+                </div>
 
+            }
 
-
-            <div className=''>
-
-                {
-                    main &&
-                    <div className='  '>
-
-
-                        <div className='  '>
-
-                            <div className='flex gap-2'>
-                                <Button className='flex justify-center items-center gap-1' color='blue' onClick={() => oldData(main.user)}><MdEdit className='text-xl' /> Edit profile</Button>
-                                <Button className='flex justify-center items-center gap-1' color='blue' onClick={singout}>singout <IoArrowForwardOutline className='text-xl' /></Button>
-                                <Link to='/dashboard/addpost'><Button className='flex justify-center items-center gap-1' color='blue' >Add Post <IoArrowForwardOutline className='text-xl' /></Button></Link>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                }
-            </div>
             <Dialog open={open} size="xs" handler={handleOpen}>
                 <div className="flex items-center justify-between">
                     <DialogHeader className="flex flex-col items-start">
