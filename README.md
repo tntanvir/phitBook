@@ -2,6 +2,11 @@
 
 Welcome to **PhitBook** – a modern social media platform where users can connect, share, and engage with others through posts, likes, comments, and following features.
 
+## Live Links
+- **Client Live Link:** [PhitBook](https://phibook1.web.app/)
+- **Backend Repository:** [GitHub](https://github.com/tntanvir/api-phitbook)
+- **Backend Live Link:** [API PhitBook](https://api-phitbook.vercel.app/)
+
 ## Features
 
 ### 🔐 Authentication
@@ -32,9 +37,6 @@ Welcome to **PhitBook** – a modern social media platform where users can conne
 - **React Router DOM** – for seamless navigation.
 - **React-Toastify** – for user notifications.
 - **Material Tailwind** – for UI components.
-
-
-
 
 ## 🔥 Contributing
 We welcome contributions! Feel free to fork this repository and submit a pull request.
